@@ -12,25 +12,46 @@ function App() {
   const [selectedCity, setSelectedCity] = useState("");
 
   const fetchCountries = async() => {
-    let response = await fetch("https://crio-location-selector.onrender.com/countries");
-    let finalData = await response.json();
+    try {
 
-    setCountries(finalData);
+      let response = await fetch("https://crio-location-selector.onrender.com/countries");
+      let finalData = await response.json();
+  
+      setCountries(finalData);
+
+    } catch (error) {
+      console.log(error)
+    }
+   
   }
 
   const fetchStates = async(countryName) => {
-    let response = await fetch(`https://crio-location-selector.onrender.com/country=${countryName}/states`);
-    let finalData = await response.json();
+    try {
+      
+      let response = await fetch(`https://crio-location-selector.onrender.com/country=${countryName}/states`);
+      let finalData = await response.json();
 
-    setStates(finalData);
-    setCities([]); // Reset cities when a new country is selected
+      setStates(finalData);
+      setCities([]); // Reset cities when a new country is selected
+
+    } catch (error) {
+      console.log(error)
+    }
+    
   }
 
   const fetchCities = async(countryName, stateName) => {
-    let response = await fetch(`https://crio-location-selector.onrender.com/country=${countryName}/state=${stateName}/cities`);
-    let finalData = await response.json();
+    try {
 
-    setCities(finalData);
+      let response = await fetch(`https://crio-location-selector.onrender.com/country=${countryName}/state=${stateName}/cities`);
+      let finalData = await response.json();
+  
+      setCities(finalData);
+      
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
   useEffect(() => {
